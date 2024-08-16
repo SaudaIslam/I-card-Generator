@@ -1,0 +1,28 @@
+{
+  "name": "new_id-card-generator",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.2",
+    "bwip-js": "^4.4.0",
+    "express": "^4.19.2",
+    "multer": "^1.4.5-lts.1",
+    "mysql": "^2.18.1"
+  },
+  "devDependencies": {
+    "chai": "^5.1.1",
+    "mocha": "^10.5.2"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "description": ""
+}
