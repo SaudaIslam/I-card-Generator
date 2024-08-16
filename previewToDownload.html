@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Preview to Download</title>
+  <link rel="stylesheet" href="./css/style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/dom-to-image@2.6.0/src/dom-to-image.min.js"></script>
+
+</head>
+
+<body id="bodyIndex">
+  <!-- ....................HEAD -->
+  <header id="headIndex">
+    <h1 id="h1Index">ID-CARD GENERATOR</h1>
+  </header>
+
+  <!-- ....................MAIN -->
+  <main id="mainIndex">
+    <section id="section1_Index">
+      <div class="id-section">
+        <div class="both_side_cards">
+          <div class="id-card">
+            <div class="back">
+              <div class="back_white">
+                <div class="back_black">
+                  <img src="./images/cu.png" alt="" class="transparent-image">
+                </div>
+              </div>
+            </div>
+            <!--_________________________________Card___Organization Logo, name and barcode -->
+            <div class="Org-logo-name">
+              <div class="Org-logo" id="Org-logo">
+                <img src="./images/uni_logo.png" alt="Org Logo" id="org-logo" />
+              </div>
+
+              <div id="Org-name" class="Org-name">
+                <p>Org-Name</p>
+              </div>
+
+
+            </div>
+
+            <!-- _________________________________Card___Image and chip-->
+            <div class="image_chip">
+              <div id="card-user-image">
+                <img src="./materials/user_icon.png" alt="Image" id="image" />
+              </div>
+              <div id="card-user-name_designation">
+                <h2 id="cardUser_name">Name</h2>
+                <h3 id="cardUser_designation">Designation</h3>
+              </div>
+            </div>
+
+            <!-- _________________________________Card___card info -->
+            <div class="card-info" id="card-info">
+              <table border="1">
+                <tr>
+                  <td>ID</td>
+                  <td id="userId">:</td>
+                </tr>
+                <tr>
+                  <td>Batch</td>
+                  <td id="card-info-batch">:</td>
+                </tr>
+                <tr>
+                  <td>Contact No.</td>
+                  <td id="card-info-contact">:</td>
+                </tr>
+                <tr>
+                  <td>Residence</td>
+                  <td id="card-info-residency">:</td>
+                </tr>
+              </table>
+            </div>
+
+            <div id="barcode-container">
+              <img id="barcode" src="" alt="Barcode" />
+            </div>
+          </div>
+
+          <!-- _________________________________________beck pages id card -->
+          <div class="back_id_card">
+            <div class="back">
+              <div class="back_white"></div>
+            </div>
+            <div class="Org-logo-name"></div>
+
+            <div class="signature_chip">
+              <div id="Org-chip" class="Org-chip">
+                <img src="./images/sim_chip.png" alt="Image" id="chipImage" />
+              </div>
+            </div>
+            
+            <div id="expirydate">
+                <b><span id="expireDate"></span></b>
+            </div>
+
+            <div id="Auth_sign">
+              <h4>Issuing Authority</h4>
+            </div>
+            
+            <div class="caution">
+              <h3>Attention!</h3>
+              <p>Must carry & wear this card during working hours</p>
+            </div>
+            
+            <div class="org_address">
+              <p>Muhali, Punjab India</p>
+              <p>www.cuchd.in</p>
+              <p>18002000025</p>
+            </div>
+          </div>
+        </div>
+        <button id="cardButton" type="button" onclick="downloadIDCard()">
+          Download ID Card
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <!-- ....................FOOTER -->
+  <footer id="footerIndex">
+    <div id="aboutUs">About Us</div>
+    <div id="cpyWrite">@copy write reserved</div>
+    <div id="feedback">Your feedback Here</div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const card = JSON.parse(localStorage.getItem('selectedCard'));
+  
+      if (card) {
+        document.getElementById('org-logo').src = card.organization_logo || './images/uni_logo.png';
+        document.getElementById('Org-name').innerText = card.organization_name || 'Organization Name';
+  
+        if (card.user_image) {
+          document.getElementById('image').src = 'data:image/jpeg;base64,' + card.user_image;
+        }
+  
+        document.getElementById('cardUser_designation').innerText = `${card.designation}`;
+        document.getElementById('cardUser_name').innerText = `${card.name}`;
+        document.getElementById('userId').innerText = `: ${card.user_id}`;
+        document.getElementById('card-info-batch').innerText = `: ${card.batch}`;
+        document.getElementById('card-info-contact').innerText = `: ${card.contact_number}`;
+        document.getElementById('card-info-residency').innerText = `: ${card.residency}`;
+  
+        // Format the expire date
+        const expireDate = new Date(card.expireDate);
+        const formattedExpireDate = `${expireDate.getFullYear()}/${String(expireDate.getMonth() + 1).padStart(2, '0')}/${String(expireDate.getDate()).padStart(2, '0')}`;
+        document.getElementById('expireDate').innerText = `Expiry date: ${formattedExpireDate}`;
+  
+        if (card.barcode) {
+          document.getElementById('barcode').src = 'data:image/png;base64,' + card.barcode;
+        }
+      }
+    });
+  
+    function downloadIDCard() {
+      var node = document.querySelector('.both_side_cards');
+  
+      domtoimage.toPng(node)
+        .then(function (dataUrl) {
+          var link = document.createElement('a');
+          link.href = dataUrl;
+          link.download = 'ID_Card.png';
+          link.click();
+        })
+        .catch(function (error) {
+          console.error('oops, something went wrong!', error);
+        });
+    }
+  </script>
+  
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      var originalContent = document.querySelector(".Org-logo-name").innerHTML;
+      document.querySelector(".back_id_card .Org-logo-name").innerHTML = originalContent;
+    });
+  </script>
+
+  
+  
+</body>
+
+</html>

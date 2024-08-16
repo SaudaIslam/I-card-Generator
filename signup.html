@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body id="body_login">
+    <header id="headIndex">
+      <h1 id="h1Index">ID-CARD GENERATOR</h1>
+    </header>
+    <div id="main_signup">
+      <div class="container_signup">
+        <h2>Sign Up</h2>
+        <form action="/signup" method="POST">
+          <div class="form-group">
+            <input
+              type="text"
+              id="name"
+              name="username"
+              placeholder="Username"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="Email address"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Your Password"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <button type="submit">Sign Up</button>
+          </div>
+        </form>
+        <div class="link">
+          <a href="index.html">Back</a>
+          <a href="login.html">Already have Account</a>
+        </div>
+      </div>
+    </div>
+    <footer id="footerIndex">
+      <div id="aboutUs">About Us</div>
+      <div id="cpyWrite">@copy write reserved</div>
+      <div id="feedback">Your feedback Here</div>
+    </footer>
+  </body>
+</html>
